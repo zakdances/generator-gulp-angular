@@ -14,8 +14,14 @@
     "ui-bootstrap": {
         "title": "Angular UI Bootstrap",
         "url": "http://angular-ui.github.io/bootstrap/",
-        "description": "Bootstrap with UI Bootstrap, components written in pure AngularJS.",
+        "description": "Bootstrap components written in pure AngularJS by the AngularUI Team.",
         "logo": "ui-bootstrap.png"
+    },
+    "angular-strap": {
+        "title": "Angular Strap",
+        "url": "http://mgcrea.github.io/angular-strap/",
+        "description": "AngularJS 1.2+ native directives for Bootstrap 3.",
+        "logo": "angular-strap.png"
     },
     "browsersync": {
         "title": "BrowserSync",

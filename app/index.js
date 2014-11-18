@@ -7,9 +7,13 @@ var chalk = require('chalk');
 
 var prompts = require('./prompts.json');
 
+var _;
+
 var GulpAngularGenerator = yeoman.generators.Base.extend({
 
   init: function () {
+    _ = this._;
+
     // Define the appName
     this.argument('appName', {
       type: String,
@@ -53,6 +57,10 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     }
 
     var done = this.async();
+
+    _.findWhere(prompts, {name: 'bootstrapComponents'}).when = function(props) {
+      return props.ui.key === 'bootstrap';
+    };
 
     this.prompt(prompts, function (props) {
       this.props = props;

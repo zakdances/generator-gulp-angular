@@ -151,57 +151,78 @@
   {
     "type": "list",
     "name": "ui",
-    "message": "Which UI framework do you want ?",
+    "message": "Which UI framework do you want?",
     "choices": [
       {
         "value": {
-          "key": "bootstrap",
-          "packages": [ {
-            "name": "bootstrap-sass-official",
-            "version": "3.2.x"
-          } ]
+          "name": "bootstrap-sass-official",
+          "version": "3.2.x",
+          "key": "bootstrap"
         },
         "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
       },
       {
         "value": {
-          "key": "ui-bootstrap",
-          "packages": [ {
-            "name": "bootstrap-sass-official",
-            "version": "3.2.x"
-          }, {
-            "name": "angular-bootstrap",
-            "version": "0.12.x"
-          } ]
-        },
-        "name": "Bootstrap with UI Bootstrap, components written in pure AngularJS"
-      },
-      {
-        "value": {
-          "key": "foundation",
-          "packages": [ {
-            "name": "foundation",
-            "version": "5.4.x"
-          } ]
+          "name": "foundation",
+          "version": "5.4.x",
+          "key": "foundation"
         },
         "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
       },
       {
         "value": {
-          "key": "angular-material",
-          "packages": [ {
-            "name": "angular-material",
-            "version": "0.5.x"
-          } ]
+          "name": "angular-material",
+          "version": "0.5.x",
+          "key": "angular-material"
         },
         "name": "Angular Material, the reference implementation of the Google's Material Design specification"
       },
       {
         "value": {
           "key": "none",
-          "packages": []
+          "name": null,
+          "version": null
         },
         "name": "None"
+      }
+    ]
+  },
+  {
+    "type": "list",
+    "name": "bootstrapComponents",
+    "message": "How do you want to implements your Bootstrap components?",
+    "choices": [
+      {
+        "value": {
+          "name": "angular-bootstrap",
+          "version": "0.12.x",
+          "key": "ui-bootstrap"
+        },
+        "name": "Angular UI Bootstrap, Bootstrap components written in pure AngularJS by the AngularUI Team"
+      },
+      {
+        "value": {
+          "name": "angular-strap",
+          "version": "2.1.x",
+          "key": "angular-strap"
+        },
+        "name": "AngularStrap, AngularJS 1.2+ native directives for Bootstrap 3"
+      },
+      {
+        "value": {
+          "name": null,
+          "version": null,
+          "key": "official"
+        },
+        "name": "The official jQuery implementation of Bootstrap"
+      },
+      {
+        "value": {
+          "name": null,
+          "version": null,
+          "key": "none"
+        },
+        "name": "No JavaScript, just CSS"
       }
     ]
   },

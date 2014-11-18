@@ -35,6 +35,7 @@ module.exports = function () {
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
     this.props.ui.key,
+    this.props.bootstrapComponents ? this.props.bootstrapComponents.key : null,
     this.props.cssPreprocessor.key
   ]
     .filter(_.isString)
