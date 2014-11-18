@@ -40,8 +40,7 @@ module.exports = function () {
     .filter(_.isString)
     .filter(function(tech) {
       return tech !== 'default' && tech !== 'css';
-    })
-  ;
+    });
 
   var techsContent = _.map(usedTechs, function(value) {
     return listTechs[value];
@@ -53,12 +52,14 @@ module.exports = function () {
   });
 
   // Select partials relative to props.ui
+  var uiFileKey = this.props.ui.key === 'ui-bootstrap' ? 'bootstrap' : this.props.ui.key;
+
   this.partialCopies = {};
 
-  var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
+  var navbarPartialSrc = 'src/components/navbar/__' + uiFileKey + '-navbar.html';
   this.partialCopies[navbarPartialSrc] = 'src/components/navbar/navbar.html';
 
-  var routerPartialSrc = 'src/app/main/__' + this.props.ui.key + '.html';
+  var routerPartialSrc = 'src/app/main/__' + uiFileKey + '.html';
   if(this.props.router.module !== null) {
     this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
   }
@@ -82,16 +83,16 @@ module.exports = function () {
   }
 
   // Format choice UI Framework
-  if(this.props.ui.key === 'bootstrap' && this.props.cssPreprocessor.extension !== 'scss') {
-    this.props.ui.name = 'bootstrap';
+  if(this.props.ui.key.indexOf('bootstrap') !== -1 && this.props.cssPreprocessor.extension !== 'scss') {
+    this.props.ui.packages[0].name = 'bootstrap';
   }
 
   this.styleCopies = {};
 
-  var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
+  var styleAppSrc = 'src/app/__' + uiFileKey + '-index.' + this.props.cssPreprocessor.extension;
   this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
-  // ## Special case for Foundation and LESS: Foundation dont have a LESS version so we include css
+  // Special case for Foundation and LESS: Foundation dont have a LESS version so we include css
   if ((this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation') || this.props.cssPreprocessor.extension === 'css') {
     this.isVendorStylesPreprocessed = false;
   } else {
@@ -99,7 +100,7 @@ module.exports = function () {
   }
 
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorSource = 'src/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension;
     this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
 };

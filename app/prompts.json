@@ -155,25 +155,51 @@
     "choices": [
       {
         "value": {
-          "name": "bootstrap-sass-official",
-          "version": "3.2.x",
-          "key": "bootstrap"
+          "key": "bootstrap",
+          "packages": [ {
+            "name": "bootstrap-sass-official",
+            "version": "3.2.x"
+          } ]
         },
         "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
       },
       {
         "value": {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation"
+          "key": "ui-bootstrap",
+          "packages": [ {
+            "name": "bootstrap-sass-official",
+            "version": "3.2.x"
+          }, {
+            "name": "angular-bootstrap",
+            "version": "0.12.x"
+          } ]
         },
-          "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
+        "name": "Bootstrap with UI Bootstrap, components written in pure AngularJS"
       },
       {
         "value": {
-          "name": null,
-          "version": null,
-          "key": "default"
+          "key": "foundation",
+          "packages": [ {
+            "name": "foundation",
+            "version": "5.4.x"
+          } ]
+        },
+        "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
+      },
+      {
+        "value": {
+          "key": "angular-material",
+          "packages": [ {
+            "name": "angular-material",
+            "version": "0.5.x"
+          } ]
+        },
+        "name": "Angular Material, the reference implementation of the Google's Material Design specification"
+      },
+      {
+        "value": {
+          "key": "none",
+          "packages": []
         },
         "name": "None"
       }
