@@ -23,6 +23,12 @@
         "description": "AngularJS 1.2+ native directives for Bootstrap 3.",
         "logo": "angular-strap.png"
     },
+    "angular-material": {
+        "title": "Angular Material Design",
+        "url": "https://material.angularjs.org/#/",
+        "description": "The Angular reference implementation of the Google's Material Design specification.",
+        "logo": "angular-material.png"
+    },
     "browsersync": {
         "title": "BrowserSync",
         "url": "http://browsersync.io/",

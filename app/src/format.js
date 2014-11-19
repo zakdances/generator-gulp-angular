@@ -46,7 +46,10 @@ module.exports = function () {
     return listTechs[value];
   });
 
-  this.technologies = JSON.stringify(techsContent, null, 2).replace(/"/g, '\'').replace(/\n/g, '\n    ');
+  this.technologies = JSON.stringify(techsContent, null, 2)
+    .replace(/'/g, '\\\'')
+    .replace(/"/g, '\'')
+    .replace(/\n/g, '\n    ');
   this.technologiesLogoCopies = _.map(usedTechs, function(value) {
     return 'src/assets/images/' + listTechs[value].logo;
   });
@@ -105,12 +108,11 @@ module.exports = function () {
   var styleAppSrc = 'src/app/__' + uiFileKey + '-index.' + this.props.cssPreprocessor.extension;
   this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
-  // Special case for Foundation and LESS: Foundation dont have a LESS version so we include css
-  if ((this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation') || this.props.cssPreprocessor.extension === 'css') {
-    this.isVendorStylesPreprocessed = false;
-  } else {
-    this.isVendorStylesPreprocessed = true;
-  }
+  this.isVendorStylesPreprocessed = !(
+    this.props.cssPreprocessor.extension === 'css' ||
+    this.props.ui.key === 'angular-material' ||
+    this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation'
+  );
 
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
     var styleVendorSource = 'src/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension;
