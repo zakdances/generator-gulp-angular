@@ -25,8 +25,7 @@ module.exports = function () {
       return '\'' + dependency + '\'';
     })
     .valueOf()
-    .join(', ')
-  ;
+    .join(', ');
 
   // Format list techs used to generate app included in main view of sample
   var listTechs = require('../techs.json');
@@ -35,12 +34,12 @@ module.exports = function () {
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
     this.props.ui.key,
-    this.props.bootstrapComponents ? this.props.bootstrapComponents.key : null,
+    this.props.bootstrapComponents.key,
     this.props.cssPreprocessor.key
   ]
     .filter(_.isString)
     .filter(function(tech) {
-      return tech !== 'default' && tech !== 'css';
+      return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
     });
 
   var techsContent = _.map(usedTechs, function(value) {
@@ -81,6 +80,19 @@ module.exports = function () {
 
     this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
     this.routerJs = '';
+  }
+
+  // Wiredep exclusions
+  this.wiredepExclusions = [];
+  if(this.props.bootstrapComponents.key !== 'official') {
+    if(this.props.cssPreprocessor.extension === 'scss') {
+      this.wiredepExclusions.push('/bootstrap-sass-official/');
+    } else {
+      this.wiredepExclusions.push('/bootstrap.js/');
+    }
+  }
+  if(this.props.cssPreprocessor.key !== 'css') {
+    this.wiredepExclusions.push('/bootstrap.css/');
   }
 
   // Format choice UI Framework
