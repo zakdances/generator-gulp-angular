@@ -157,7 +157,8 @@
         "value": {
           "name": "bootstrap-sass-official",
           "version": "3.2.x",
-          "key": "bootstrap"
+          "key": "bootstrap",
+          "module": null
         },
         "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
       },
@@ -165,7 +166,8 @@
         "value": {
           "name": "foundation",
           "version": "5.4.x",
-          "key": "foundation"
+          "key": "foundation",
+          "module": null
         },
         "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
       },
@@ -173,7 +175,8 @@
         "value": {
           "name": "angular-material",
           "version": "0.5.x",
-          "key": "angular-material"
+          "key": "angular-material",
+          "module": "ngMaterial"
         },
         "name": "Angular Material, the reference implementation of the Google's Material Design specification"
       },
@@ -181,7 +184,8 @@
         "value": {
           "key": "none",
           "name": null,
-          "version": null
+          "version": null,
+          "module": null
         },
         "name": "None"
       }
@@ -196,7 +200,8 @@
         "value": {
           "name": "angular-bootstrap",
           "version": "0.12.x",
-          "key": "ui-bootstrap"
+          "key": "ui-bootstrap",
+          "module": "ui.bootstrap"
         },
         "name": "Angular UI Bootstrap, Bootstrap components written in pure AngularJS by the AngularUI Team"
       },
@@ -204,7 +209,8 @@
         "value": {
           "name": "angular-strap",
           "version": "2.1.x",
-          "key": "angular-strap"
+          "key": "angular-strap",
+          "module": "mgcrea.ngStrap"
         },
         "name": "AngularStrap, AngularJS 1.2+ native directives for Bootstrap 3"
       },
@@ -212,7 +218,8 @@
         "value": {
           "name": null,
           "version": null,
-          "key": "official"
+          "key": "official",
+          "module": null
         },
         "name": "The official jQuery implementation of Bootstrap"
       },
@@ -220,7 +227,8 @@
         "value": {
           "name": null,
           "version": null,
-          "key": "none"
+          "key": "none",
+          "module": null
         },
         "name": "No JavaScript, just CSS"
       }

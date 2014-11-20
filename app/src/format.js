@@ -16,7 +16,9 @@ module.exports = function () {
   ngModules = _.flatten([
     ngModules,
     this.props.resource.module,
-    this.props.router.module
+    this.props.router.module,
+    this.props.ui.module,
+    this.props.bootstrapComponents.module
   ]);
 
   this.modulesDependencies = _.chain(ngModules)

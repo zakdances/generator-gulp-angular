@@ -67,7 +67,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
         props.bootstrapComponents = {
           name: null,
           version: null,
-          key: null
+          key: null,
+          module: null
         };
       }
 
