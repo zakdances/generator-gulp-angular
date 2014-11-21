@@ -17,14 +17,14 @@
   {
     "type": "checkbox",
     "name": "angularModules",
-    "message": "Which Angular's modules would you want to have? (ngRoute and ngResource will be addressed after)",
+    "message": "Which Angular modules do you want? (ngRoute and ngResource are offered later)",
     "choices": [
       {
         "value": {
           "name": "angular-animate",
           "module": "ngAnimate"
         },
-        "name": "angular-animate.js (enable animation features)",
+        "name": "angular-animate.js (enables animation features)",
         "checked": true
       },
       {
@@ -32,7 +32,7 @@
           "name": "angular-cookies",
           "module": "ngCookies"
         },
-        "name": "angular-cookies.js (handle cookie management)",
+        "name": "angular-cookies.js (handles cookie management)",
         "checked": true
       },
       {
@@ -48,7 +48,7 @@
           "name": "angular-sanitize",
           "module": "ngSanitize"
         },
-        "name": "angular-sanitize.js (to securely parse and manipulate HTML)",
+        "name": "angular-sanitize.js (securely parses and manipulates HTML)",
         "checked": true
       }
     ]
@@ -56,35 +56,35 @@
   {
     "type": "list",
     "name": "jQuery",
-    "message": "Would you need jQuery or perhaps Zepto?",
+    "message": "Do you want jQuery or perhaps Zepto?",
     "choices": [
       {
         "value": {
           "name": "jquery",
           "version": "1.11.x"
         },
-        "name": "jQuery 1.11.x (branch still supporting IE6, 7 and 8)"
+        "name": "jQuery 1.11.x (older version which still supports IE6, 7 and 8)"
       },
       {
         "value": {
           "name": "jquery",
           "version": "2.1.x"
         },
-        "name": "jQuery 2.1.x (new version, lighter, IE9+)"
+        "name": "jQuery 2.1.x (newer version, lighter, IE9+)"
       },
       {
         "value": {
           "name": "zeptojs",
           "version": "1.1.x"
         },
-        "name": "ZeptoJS 1.1.x (jQuery compatible but very much lighter)"
+        "name": "ZeptoJS 1.1.x (lighter but still jQuery compatible)"
       },
       {
         "value": {
           "name": null,
           "version": null
         },
-        "name": "None (Angular will use its own jqLite)"
+        "name": "None (Angular will use it's own jqLite)"
       }
     ]
   },
@@ -98,7 +98,7 @@
           "name": "angular-resource",
           "module": "ngResource"
         },
-        "name": "ngResource, the official support for RESTful services"
+        "name": "ngResource, the officially supported module for RESTful services."
       },
       {
         "value": {
@@ -106,7 +106,7 @@
           "version": "1.3.x",
           "module": "restangular"
         },
-        "name": "Restangular, an alternative service to handles RESTful requests"
+        "name": "Restangular, an alternative service to handle RESTful requests."
       },
       {
         "value": {
@@ -121,14 +121,14 @@
   {
     "type": "list",
     "name": "router",
-    "message": "Would you like to use a router ?",
+    "message": "Would you like to use a router?",
     "choices": [
       {
         "value": {
           "name": "angular-route",
           "module": "ngRoute"
         },
-        "name": "ngRoute, the official router"
+        "name": "ngRoute, the official router."
       },
       {
         "value": {
@@ -136,7 +136,7 @@
           "version": "0.2.x",
           "module": "ui.router"
         },
-        "name": "UI Router, flexible routing with nested views"
+        "name": "UI Router, flexible routing with nested views."
       },
       {
         "value": {
@@ -151,7 +151,7 @@
   {
     "type": "list",
     "name": "ui",
-    "message": "Which UI framework do you want ?",
+    "message": "Which UI framework do you want?",
     "choices": [
       {
         "value": {
@@ -159,7 +159,7 @@
           "version": "3.2.x",
           "key": "bootstrap"
         },
-        "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
+        "name": "Bootstrap, the most popular HTML, CSS, and JS framework."
       },
       {
         "value": {
@@ -167,7 +167,7 @@
           "version": "5.4.x",
           "key": "foundation"
         },
-          "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
+          "name": "Foundation, \"The most advanced responsive front-end framework in the world.\""
       },
       {
         "value": {
@@ -181,8 +181,58 @@
   },
   {
     "type": "list",
+    "name": "jsPreprocessor",
+    "message": "Do you want to use a JavaScript preprocessor?",
+    "choices": [
+      {
+        "value": {
+          "key": "coffeescript",
+          "extension": "coffee",
+          "npm": {
+            "gulp-coffee": "^2.2.0"
+          }
+        },
+        "name": "CoffeeScript, a little language that compiles into JavaScript."
+      },
+      {
+        "value": {
+          "key": "javascript",
+          "extension": "js",
+          "npm": {}
+        },
+        "name": "None, only plain JavaScript."
+      }
+    ]
+  },
+  {
+    "type": "list",
+    "name": "htmlPreprocessor",
+    "message": "Do you want to use an HTML preprocessor?",
+    "choices": [
+      {
+        "value": {
+          "key": "jade",
+          "extension": "jade",
+          "npm": {
+            "gulp-jade": "^0.9.0"
+          }
+        },
+        "name": "Jade, a terse and simple templating language with a strong focus on performance and powerful features."
+      },
+      {
+        "value": {
+          "key": "html",
+          "extension": "html",
+          "npm": {}
+        },
+        "name": "None, only plain HTML."
+      }
+    ]
+  },
+  {
+    "type": "list",
     "name": "cssPreprocessor",
-    "message": "Which CSS preprocessor do you want?",
+    "message": "Do you want to use a CSS preprocessor?",
     "choices": [
       {
         "value": {
@@ -202,7 +252,7 @@
             "gulp-ruby-sass": "^0.7.1"
           }
         },
-        "name": "Sass (Ruby), Original Syntactically Awesome StyleSheets (requires Ruby)"
+        "name": "Sass (Ruby), Original Syntactically Awesome StyleSheets. (requires Ruby) !!!WARNING: This option does not support souremaps due to bugs in the current version of gulp-ruby-sass (v.0.7.1)!!!"
       },
       {
         "value": {
@@ -230,8 +280,36 @@
           "extension": "css",
           "npm": {}
         },
-        "name": "None, only the good old CSS"
+        "name": "None, only plain CSS."
       }
     ]
-  }
+  },
+  {
+    "type": "list",
+    "name": "indentationLevel",
+    "message": "What level of indentation do you want?",
+    "choices": [
+      {
+        "value": {
+          "key"   : "space",
+          "value" : 2
+        },
+        "name": "2 spaces."
+      },
+      {
+        "value": {
+          "key"   : "space",
+          "value" : 4
+        },
+        "name": "4 spaces."
+      },
+      {
+        "value": {
+          "key"   : "tab",
+          "value" : 1
+        },
+        "name": "1 tab."
+      }
+    ]
+  },
 ]
