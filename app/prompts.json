@@ -186,7 +186,7 @@
     "choices": [
       {
         "value": {
-          "key": "coffeescript",
+          "key": "coffee",
           "extension": "coffee",
           "npm": {
             "gulp-coffee": "^2.2.0"
@@ -196,7 +196,7 @@
       },
       {
         "value": {
-          "key": "javascript",
+          "key": "js",
           "extension": "js",
           "npm": {}
         },
