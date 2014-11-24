@@ -3,6 +3,10 @@
 module.exports = function () {
   var _ = this._;
 
+  var scriptPrimary = _.find(this.props.jsPreprocs, 'primary')    || {'key': 'default', 'extension': 'js'};
+  var markupPrimary = _.find(this.props.htmlPreprocs, 'primary')  || {'key': 'default', 'extension': 'html'};
+  var stylePrimary  = _.find(this.props.cssPreprocs, 'primary')   || {'key': 'default', 'extension': 'css'};
+
   // Retrieve props stored in .yo-rc.json
   if (this.skipConfig) {
     this.props = this.config.get('props');
@@ -25,8 +29,7 @@ module.exports = function () {
       return '\'' + dependency + '\'';
     })
     .valueOf()
-    .join(', ')
-  ;
+    .join(', ');
 
   // Format list techs used to generate app included in main view of sample
   var listTechs = require('../techs.json');
@@ -34,14 +37,16 @@ module.exports = function () {
   var usedTechs = [
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
-    this.props.ui.key,
-    this.props.cssPreprocessor.key
-  ]
-    .filter(_.isString)
+    this.props.ui.key
+    ].concat([this.props.jsPreprocs, this.props.htmlPreprocs, this.props.cssPreprocs].reduce( function(p,v,i,a) {
+      v.forEach( function(v,i,a) {
+        p.push(v.key)
+      });
+      return p;
+    }, []))
     .filter(function(tech) {
-      return tech !== 'default' && tech !== 'css';
-    })
-  ;
+      return _.isString(tech) && tech !== 'default';
+  });
 
   var techsContent = _.map(usedTechs, function(value) {
     return listTechs[value];
@@ -82,24 +87,29 @@ module.exports = function () {
   }
 
   // Format choice UI Framework
-  if(this.props.ui.key === 'bootstrap' && this.props.cssPreprocessor.extension !== 'scss') {
+  if(this.props.ui.key === 'bootstrap' && stylePrimary.extension !== 'scss') {
     this.props.ui.name = 'bootstrap';
   }
-
+  
   this.styleCopies = {};
+  
+  var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + stylePrimary.extension;
+  this.styleCopies[styleAppSrc] = 'src/app/index.' + stylePrimary.extension;
 
-  var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
-  this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
-
-  // ## Special case for Foundation and LESS: Foundation dont have a LESS version so we include css
-  if ((this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation') || this.props.cssPreprocessor.extension === 'css'  || this.props.cssPreprocessor.extension === 'styl') {
+  // ## Special case for Foundation, LESS, and Stylus: Foundation doesn't have a LESS or Stylus version so we include css
+  if (((stylePrimary.extension === 'less' || stylePrimary.extension === 'styl') && this.props.ui.key === 'foundation') || stylePrimary.extension    === 'css')
+  {
     this.isVendorStylesPreprocessed = false;
   } else {
     this.isVendorStylesPreprocessed = true;
   }
 
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + stylePrimary.extension;
+    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + stylePrimary.extension;
   }
+
+
+
+  
 };

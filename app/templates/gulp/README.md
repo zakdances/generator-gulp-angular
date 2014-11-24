@@ -1,7 +1,7 @@
 # Gulp Tasks
 
-Because the `gulpfile.js` was becoming enormous and because I hate huge files, this
-directory contains all the gulp tasks splited by purposes.
+Because the `gulpfile.js` was becoming enormous and because we hate huge files, this
+directory contains all the gulp tasks split by purpose.
 
 ## build.js
 

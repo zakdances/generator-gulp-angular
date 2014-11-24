@@ -5,7 +5,7 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 
-var prompts = require('./prompts.json');
+var prompts = require('./prompts.js');
 
 var GulpAngularGenerator = yeoman.generators.Base.extend({
 
@@ -39,7 +39,6 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
         default: true,
       }], function (answers) {
         this.skipConfig = answers.skipConfig;
-
         cb();
       }.bind(this));
     } else {
@@ -54,7 +53,27 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
     var done = this.async();
 
-    this.prompt(prompts, function (props) {
+    this.prompt(prompts, function(props) {
+      if (!props.jsPreprocs)    {props.jsPreprocs   = [];};
+      if (!props.htmlPreprocs)  {props.htmlPreprocs = [];};
+      if (!props.cssPreprocs)   {props.cssPreprocs  = [];};
+
+      ['jsPrimaryPreproc', 'htmlPrimaryPreproc', 'cssPrimaryPreproc'].forEach( function(v,i,a) {
+        v = props[v];
+        v['primary'] = true;
+        if (i == 0 && v.key != 'js') {
+          props.jsPreprocs.unshift(v);
+        }
+        else if (i == 1 && v.key != 'html') {
+          props.htmlPreprocs.unshift(v);
+        }
+        else if (i == 2 && v.key != 'css') {
+          props.cssPreprocs.unshift(v);
+        };
+        delete props[a[i]];
+      } );
+
+
       this.props = props;
       done();
     }.bind(this));
@@ -70,7 +89,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     this.config.forceSave();
   },
 
-  // Format props to template values
+  // Format templates using prop values
   formatProps: require('./src/format'),
 
   // Write files (copy, template)
