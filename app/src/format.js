@@ -1,11 +1,64 @@
 'use strict';
 
+var files     = require('../files.json');
+var path      = require('path');
+var Vinyl     = require('vinyl');
+
+var html2jade = require('html2jade');
+var js2coffee = require('gulp-js2coffee');
+var gulpIf    = require('gulp-if');
+// var js2coffee = require('js2coffee');
+
 module.exports = function () {
-  var _ = this._;
+  var _       = this._;
+  this.files  = files;
 
   var scriptPrimary = _.find(this.props.jsPreprocs, 'primary')    || {'key': 'default', 'extension': 'js'};
   var markupPrimary = _.find(this.props.htmlPreprocs, 'primary')  || {'key': 'default', 'extension': 'html'};
   var stylePrimary  = _.find(this.props.cssPreprocs, 'primary')   || {'key': 'default', 'extension': 'css'};
+
+  // var html2Jade = function(src) {
+
+  // };
+  // var js2Jade = function(src) {
+
+  // };
+  // var indent = function(src) {
+
+  // }
+
+
+
+  // TODO: Use lodash to make this less ugly.
+  if (scriptPrimary.extension == 'coffee') {
+
+    this.registerTransformStream(gulpIf('**/*.js', js2coffee()));
+
+    // _.forIn(this.files, function(v, k) {
+
+    //   var map = _.map(v, function(v,i,a) {
+
+    //     v = path.extname(v) == '.js' ? new Vinyl({
+    //       // cwd: "../",
+    //       // base: "/test/",
+    //       path: v,
+    //       contents: new Buffer(this.fs.read(this.templatePath(v)))
+    //     }) : v;
+
+    //     return v;
+    //   }, this);
+
+
+
+    // }, this);
+
+  // Format JavaScript
+  // if (scriptPrimary.extension == 'coffee') {
+  //   js2coffee.build(jstContent, {show_src_lineno: false, single_quotes: true, indent: "    "});
+  // };
+  }
+
+
 
   // Retrieve props stored in .yo-rc.json
   if (this.skipConfig) {
@@ -38,6 +91,7 @@ module.exports = function () {
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
     this.props.ui.key
+    // Get keys of chosen preprocessors and add them to the list
     ].concat([this.props.jsPreprocs, this.props.htmlPreprocs, this.props.cssPreprocs].reduce( function(p,v,i,a) {
       v.forEach( function(v,i,a) {
         p.push(v.key)
@@ -69,22 +123,41 @@ module.exports = function () {
   }
 
   // Compute routing relative to props.router
-  if (this.props.router.module === 'ngRoute') {
-    this.routerHtml = '<div ng-view></div>';
-    this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
-  } else if (this.props.router.module === 'ui.router') {
-    this.routerHtml = '<div ui-view></div>';
-    this.routerJs = this.read('src/app/__uirouter.js', 'utf8');
-  } else {
-    this.routerHtml = this.read(routerPartialSrc, 'utf8');
-    this.routerHtml = this.routerHtml.replace(
-      /^<div class="container">/,
-      '<div class="container" ng-controller="MainCtrl">'
-    );
-
-    this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
-    this.routerJs = '';
+  switch(this.props.router.module) {
+    case 'ngRoute':
+      this.routerHtml = '<div ng-view></div>';
+      this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
+      break;
+    case 'ui.router':
+      this.routerHtml = '<div ui-view></div>';
+      this.routerJs = this.read('src/app/__uirouter.js', 'utf8');
+      break;
+    default:
+      this.routerHtml = this.read(routerPartialSrc, 'utf8');
+      this.routerHtml = this.routerHtml.replace(
+        /^<div class="container">/,
+        '<div class="container" ng-controller="MainCtrl">'
+      );
+      this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
+      this.routerJs = '';
+      break;
   }
+  // if (this.props.router.module === 'ngRoute') {
+  //   this.routerHtml = '<div ng-view></div>';
+  //   this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
+  // } else if (this.props.router.module === 'ui.router') {
+  //   this.routerHtml = '<div ui-view></div>';
+  //   this.routerJs = this.read('src/app/__uirouter.js', 'utf8');
+  // } else {
+  //   this.routerHtml = this.read(routerPartialSrc, 'utf8');
+  //   this.routerHtml = this.routerHtml.replace(
+  //     /^<div class="container">/,
+  //     '<div class="container" ng-controller="MainCtrl">'
+  //   );
+
+  //   this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
+  //   this.routerJs = '';
+  // }
 
   // Format choice UI Framework
   if(this.props.ui.key === 'bootstrap' && stylePrimary.extension !== 'scss') {
@@ -108,7 +181,6 @@ module.exports = function () {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + stylePrimary.extension;
     this.styleCopies[styleVendorSource] = 'src/app/vendor.' + stylePrimary.extension;
   }
-
 
 
   

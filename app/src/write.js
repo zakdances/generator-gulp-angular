@@ -1,11 +1,12 @@
 'use strict';
 
-var files = require('../files.json');
+// var files = require('../files.json');
 var path = require('path');
 
 /* Process files */
 module.exports = function () {
-  var _ = this._;
+  var _     = this._;
+  var files = this.files
 
   // Copy static files
   _.forEach(files.staticFiles, function(src) {

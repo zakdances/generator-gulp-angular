@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'browser-sync', 'lazypipe', 'main-bower-files', 'uglify-save-license', 'del']
 });
+$.ifff = require('gulp-if');
 
 var reload = $.browserSync.reload;
 
@@ -40,13 +41,13 @@ gulp.task('styles', ['wiredep'],  function () {
 
         case 'node-sass': /* If Node Sass option was selected */ %>
     .pipe(gulp.src(o.dir.src + '/**/*.scss'))
-    .pipe($.if('**/*.scss', $.sass({
+    .pipe($.iff('**/*.scss', $.sass({
         style: 'expanded'
       })))
 
       <% case 'ruby-sass': /* If Ruby Sass option was selected */ %>
     .pipe(gulp.src(o.dir.src + '/**/*.scss'))
-    .pipe($.if('**/*.scss', $.lazypipe()
+    .pipe($.iff('**/*.scss', $.lazypipe()
       .pipe($.rubySass, {
           style: 'expanded',
           sourcemap: false // this options is ignored due to bugs in gulp-ruby-sass v.0.7.1
@@ -56,7 +57,7 @@ gulp.task('styles', ['wiredep'],  function () {
 
       <% case 'less': /* If LESS option was selected */ %>
     .pipe(gulp.src(o.dir.src + '/**/*.less'))
-    .pipe($.if('**/*.less', $.less(
+    .pipe($.iff('**/*.less', $.less(
         paths: [
           'src/bower_components',
           'src/app',
@@ -66,7 +67,7 @@ gulp.task('styles', ['wiredep'],  function () {
 
       <% case 'stylus': /* If Stylus option was selected */ %>
     .pipe(gulp.src(o.dir.src + '/**/*.styl'))
-    .pipe($.if('**/*.styl', $.stylus()))
+    .pipe($.iff('**/*.styl', $.stylus()))
     <% }} ) %>
 
     .pipe($.autoprefixer({
@@ -90,7 +91,7 @@ gulp.task('scripts', function () {
 
         case 'coffee': /* If CoffeeScript option was selected */ %>
     .pipe(gulp.src(o.dir.src + '/**/*.coffee'))
-    .pipe($.if('**/*.coffee', $.lazypipe()
+    .pipe($.iff('**/*.coffee', $.lazypipe()
       .pipe($.coffee, {
           bare: false
         })
@@ -117,7 +118,7 @@ gulp.task('html:base', ['wiredep'], function () {
 
         case 'jade': /* If Jade option was selected */ %>
     .pipe(gulp.src(o.dir.src + '/*.jade'))
-    .pipe($.if('*.jade', $.lazypipe()
+    .pipe($.iff('*.jade', $.lazypipe()
       .pipe($.jade, {
           locals: {},
           pretty: true
@@ -137,7 +138,7 @@ gulp.task('html:partials', function () {
 
         case 'jade': %>
     .pipe(gulp.src(o.dir.src + '/{app,components}/**/*.jade'))
-    .pipe($.if('**/*.jade', $.lazypipe()
+    .pipe($.iff('**/*.jade', $.lazypipe()
       .pipe($.jade, {
           locals: {},
           pretty: true

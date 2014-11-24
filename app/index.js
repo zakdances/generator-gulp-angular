@@ -73,7 +73,6 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
         delete props[a[i]];
       } );
 
-
       this.props = props;
       done();
     }.bind(this));

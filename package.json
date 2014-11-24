@@ -22,7 +22,12 @@
   },
   "dependencies": {
     "chalk": "~0.4.0",
-    "yeoman-generator": "~0.17.0",
+    "gulp-if": "^1.2.5",
+    "gulp-js2coffee": "^0.1.0",
+    "html2jade": "~0.8.1",
+    "js2coffee": "~0.3.3",
+    "vinyl": "~0.4.5",
+    "yeoman-generator": "~0.18.0",
     "yosay": "~1.0.0"
   },
   "devDependencies": {
