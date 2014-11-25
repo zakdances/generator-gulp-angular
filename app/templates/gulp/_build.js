@@ -57,13 +57,13 @@ gulp.task('styles', ['wiredep'],  function () {
 
       <% case 'less': /* If LESS option was selected */ %>
     .pipe(gulp.src(o.dir.src + '/**/*.less'))
-    .pipe($.iff('**/*.less', $.less(
+    .pipe($.iff('**/*.less', $.less({
         paths: [
           'src/bower_components',
           'src/app',
           'src/components'
         ]
-      )))
+      })))
 
       <% case 'stylus': /* If Stylus option was selected */ %>
     .pipe(gulp.src(o.dir.src + '/**/*.styl'))

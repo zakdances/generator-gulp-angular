@@ -1,8 +1,8 @@
 'use strict';
 
-var files     = require('../files.json');
-var path      = require('path');
-var Vinyl     = require('vinyl');
+// var files     = require('../files.json');
+// var path      = require('path');
+// var Vinyl     = require('vinyl');
 
 var html2jade = require('html2jade');
 var js2coffee = require('gulp-js2coffee');
@@ -11,7 +11,7 @@ var gulpIf    = require('gulp-if');
 
 module.exports = function () {
   var _       = this._;
-  this.files  = files;
+  // this.files  = files;
 
   var scriptPrimary = _.find(this.props.jsPreprocs, 'primary')    || {'key': 'default', 'extension': 'js'};
   var markupPrimary = _.find(this.props.htmlPreprocs, 'primary')  || {'key': 'default', 'extension': 'html'};
