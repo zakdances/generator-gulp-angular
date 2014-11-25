@@ -95,12 +95,12 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   writeFiles: require('./src/write'),
 
   // Install dependencies
-  install: function () {
-    this.installDependencies({
-      skipInstall: this.options['skip-install'],
-      skipMessage: this.options['skip-message']
-    });
-  }
+  // install: function () {
+  //   this.installDependencies({
+  //     skipInstall: this.options['skip-install'],
+  //     skipMessage: this.options['skip-message']
+  //   });
+  // }
 });
 
 module.exports = GulpAngularGenerator;
