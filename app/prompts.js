@@ -47,7 +47,7 @@ var whuh = [
         "key": "css",
         "extension": "css"
       },
-      "name": "CSS, nothing extra."
+      "name": "None, just CSS."
     }
   ];
 
@@ -246,7 +246,7 @@ var prompts = [
   {
     "type": "list",
     "name": "jsPrimaryPreproc",
-    "message": "Choose a primary scripting language. (JavaScript is still supported for all options)",
+    "message": "Which JavaScript preprocessor would you like?. (plain JavaScript is supported for all options)",
     "choices": [
       {
         "value": {
@@ -263,14 +263,14 @@ var prompts = [
           "key": "js",
           "extension": "js"
         },
-        "name": "JavaScript, plain and simple.",
+        "name": "None, just JavaScript.",
       }
     ]
   },
   {
     "type": "list",
     "name": "htmlPrimaryPreproc",
-    "message": "Choose a primary markup language. (HTML is still supported for all options)",
+    "message": "Which HTML preprocessor would you like? (plain HTML is supported for all options)",
     "choices": [
       {
         "value": {
@@ -288,25 +288,29 @@ var prompts = [
           "key": "html",
           "extension": "html"
         },
-        "name": "HTML, plain and simple.",
+        "name": "None, just HTML.",
       }
     ]
   },
   {
     "type": "list",
     "name": "cssPrimaryPreproc",
-    "message": "Choose a primary stylesheet. (CSS is still supported for all options)",
+    "message": "Which CSS preprocessor would you like? (CSS is still supported for all options)",
     "choices": _.cloneDeep(whuh)
   },
   {
     "type": "checkbox",
     "name": "cssPreprocs",
-    "message": "Add extra stylesheet support? (Multiple answers accepted)",
+    "message": "Add extra CSS preprocessor support? (Multiple answers accepted)",
     "choices": (function(answers) {
 
       var foo = _.cloneDeep(whuh);
       var p   = answers.cssPrimaryPreproc;
       
+      _.remove(foo, function(v,i,a) {
+        return v.value && v.value.key == 'css';
+      });
+
       foo.forEach( function(v,i,a) {
 
         // var key = v.key;
@@ -317,7 +321,7 @@ var prompts = [
           if (p.extension == 'scss' && this.value.extension == 'scss') {
               msg = p.key + ' already chosen';
           };
-          msg = this.value.key == 'css' ? 'always supported' : msg;
+          // msg = this.value.key == 'css' ? 'always supported' : msg;
           msg = p.key == this.value.key ? 'primary' : msg;
           return msg;
         }).bind(v);
